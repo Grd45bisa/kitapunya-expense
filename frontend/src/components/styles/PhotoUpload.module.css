@@ -1,0 +1,395 @@
+/* PhotoUpload.module.css - Following Original Structure */
+.photoUploadSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.photoUploadArea {
+  border: 2px dashed #A9C9D4;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #D1F2EB 0%, #E8F8F5 100%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photoUploadArea.uploadAreaHover:hover {
+  border-color: #00B8B8;
+  background: linear-gradient(135deg, #C7F0E0 0%, #D1F2EB 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 184, 184, 0.1);
+}
+
+.uploadPlaceholder {
+  text-align: center;
+  padding: 2rem;
+  color: #2F4F4F;
+}
+
+.uploadPlaceholder i {
+  font-size: 4rem;
+  color: #00B8B8;
+  margin-bottom: 1rem;
+  display: block;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.uploadPlaceholder p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #2F4F4F;
+}
+
+.uploadPlaceholder span {
+  font-size: 0.95rem;
+  color: #708090;
+}
+
+.uploadFormats {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #A0A0A0;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.uploadedImage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #f8f8f8;
+  border-radius: 13px;
+}
+
+.uploadedImage.imageZoomed {
+  cursor: move;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.imageContainer img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+  border-radius: 8px;
+}
+
+/* Zoom Hint Tooltip */
+.zoomHintTooltip {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #00B8B8 0%, #009E9E 100%);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  z-index: 15;
+  animation: slideDown 0.3s ease-out;
+  box-shadow: 0 4px 12px rgba(0, 184, 184, 0.3);
+}
+
+.zoomHintTooltip i {
+  margin-right: 6px;
+}
+
+@keyframes slideDown {
+  from { 
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Zoom Controls */
+.zoomControls {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.zoomInfo {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.zoomActions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.zoomHint {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(10px);
+}
+
+.zoomCloseBtn {
+  background: rgba(255, 111, 97, 0.9);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  pointer-events: all;
+  backdrop-filter: blur(10px);
+}
+
+.zoomCloseBtn:hover {
+  background: rgba(255, 87, 34, 0.95);
+  transform: scale(1.05);
+}
+
+/* Mini Map */
+.miniMap {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 80px;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  z-index: 20;
+  backdrop-filter: blur(5px);
+}
+
+.miniMapViewport {
+  position: absolute;
+  width: 40%;
+  height: 40%;
+  border: 2px solid #00B8B8;
+  background: rgba(0, 184, 184, 0.2);
+  transition: all 0.1s ease;
+  transform: translate(-50%, -50%);
+}
+
+/* Image Actions */
+.imageActions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 8px;
+  z-index: 15;
+}
+
+.removeImage,
+.zoomButton {
+  background: rgba(255, 255, 255, 0.95);
+  color: #2F4F4F;
+  border: none;
+  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.removeImage:hover {
+  background: #FF6F61;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(255, 111, 97, 0.3);
+}
+
+.zoomButton:hover {
+  background: #00B8B8;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 184, 184, 0.3);
+}
+
+/* Analyze Button */
+.analyzeButton {
+  background: linear-gradient(135deg, #00B8B8 0%, #009E9E 100%);
+  color: #fff;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 184, 184, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.analyzeButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.analyzeButton:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.analyzeButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 184, 184, 0.35);
+}
+
+.analyzeButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.analyzeButton:disabled {
+  background: linear-gradient(135deg, #B0B0B0 0%, #9E9E9E 100%);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.analyzeButton i {
+  font-size: 1.2rem;
+}
+
+/* Spinner */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Offline Note */
+.offlineNote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #FFF5F5;
+  color: #FF6F61;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  border: 1px solid #FFE0E0;
+  animation: fadeIn 0.3s ease;
+}
+
+.offlineNote i {
+  font-size: 1rem;
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .photoUploadArea {
+    height: 250px;
+  }
+  
+  .uploadPlaceholder i {
+    font-size: 3rem;
+  }
+  
+  .miniMap {
+    width: 60px;
+    height: 45px;
+  }
+  
+  .zoomControls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .zoomActions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

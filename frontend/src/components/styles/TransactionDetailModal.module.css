@@ -1,0 +1,379 @@
+/* TransactionDetailModal.module.css - Layout Kiri-Kanan with Dark Mode */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+[data-theme="dark"] .modal {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.modalContent {
+  background: var(--bg-card);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 1000px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.3s ease;
+  border: 1px solid var(--border);
+}
+
+/* Modal Header */
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-hover);
+}
+
+.headerInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.categoryIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.25rem;
+}
+
+.headerInfo h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.categoryTag {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+/* Modal Body - Layout Kiri-Kanan */
+.modalBody {
+  padding: 2rem;
+  overflow-y: auto;
+  flex: 1;
+  background: var(--bg-card);
+}
+
+.modalLayout {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 2rem;
+  height: 100%;
+}
+
+/* Left Section - Photo */
+.photoSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.photoContainer {
+  width: 100%;
+  height: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.noPhotoPlaceholder {
+  width: 100%;
+  height: 400px;
+  background: var(--bg-hover);
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--text-muted);
+}
+
+.noPhotoPlaceholder i {
+  font-size: 3rem;
+  opacity: 0.5;
+}
+
+.noPhotoPlaceholder span {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Right Section - Details */
+.detailsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.amountSection {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--success);
+  background: linear-gradient(135deg, var(--success), #66BB6A);
+  border-radius: 12px;
+  color: white;
+}
+
+[data-theme="dark"] .amountSection {
+  background: linear-gradient(135deg, #2E7D32, #388E3C);
+}
+
+.totalAmount {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.currency {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+}
+
+.amount {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  line-height: 1;
+}
+
+.dateInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+}
+
+.dateInfo i {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Details Grid */
+.detailsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detailItem {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.2s ease;
+}
+
+.detailItem:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.detailLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.detailLabel i {
+  color: var(--text-secondary);
+  width: 16px;
+  text-align: center;
+}
+
+.detailValue {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.hasPhoto {
+  color: var(--success);
+  font-weight: 500;
+}
+
+.noPhoto {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.filename {
+  font-family: 'Courier New', monospace;
+  background: var(--bg-hover);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  word-break: break-all;
+  border: 1px solid var(--border);
+}
+
+/* Modal Footer */
+.modalFooter {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-hover);
+  display: flex;
+  justify-content: center;
+}
+
+.closeFooterButton {
+  background: var(--text-secondary);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.closeFooterButton:hover {
+  background: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+/* Responsive - Tablet */
+@media (max-width: 1024px) {
+  .modalLayout {
+    grid-template-columns: 350px 1fr;
+    gap: 1.5rem;
+  }
+
+  .photoContainer {
+    height: 350px;
+  }
+
+  .noPhotoPlaceholder {
+    height: 350px;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .modalContent {
+    max-width: 95%;
+    max-height: 95vh;
+  }
+
+  .modalLayout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .photoContainer,
+  .noPhotoPlaceholder {
+    height: 250px;
+  }
+
+  .modalHeader {
+    padding: 1rem 1.5rem;
+  }
+
+  .modalBody {
+    padding: 1.5rem;
+  }
+
+  .amount {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    padding: 0;
+  }
+
+  .modalContent {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .modalHeader {
+    padding: 1rem;
+  }
+
+  .modalBody {
+    padding: 1rem;
+  }
+
+  .modalFooter {
+    padding: 1rem;
+  }
+
+  .photoContainer,
+  .noPhotoPlaceholder {
+    height: 200px;
+  }
+
+  .headerInfo h2 {
+    font-size: 1.25rem;
+  }
+
+  .amount {
+    font-size: 1.75rem;
+  }
+}

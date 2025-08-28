@@ -1,0 +1,287 @@
+/* components/styles/Notification.module.css - Non-Intrusive Floating Notification */
+
+.notification {
+  /* Fixed positioning - won't affect document flow */
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  
+  /* High z-index to ensure it floats above everything */
+  z-index: 9999;
+  
+  /* Styling */
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15),
+              0 2px 10px rgba(0, 0, 0, 0.1);
+  
+  /* Layout */
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 280px;
+  max-width: 420px;
+  
+  /* Typography */
+  font-size: 0.925rem;
+  color: white;
+  font-weight: 500;
+  
+  /* Effects */
+  backdrop-filter: blur(12px);
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  
+  /* Animation */
+  animation: floatIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform-origin: top right;
+  
+  /* Ensure it doesn't interfere with page interaction */
+  pointer-events: auto;
+}
+
+/* Smooth entrance animation */
+@keyframes floatIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+  50% {
+    transform: translateY(5px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Progress bar indicator */
+.notification::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 0 0 12px 12px;
+  animation: shrinkProgress 4s linear;
+  transform-origin: left;
+}
+
+@keyframes shrinkProgress {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+/* Subtle glow effect */
+.notification::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.2) 0%, 
+    transparent 50%);
+  pointer-events: none;
+}
+
+/* Icon styling */
+.notificationIcon {
+  font-size: 1.25rem;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Message text */
+.message {
+  flex: 1;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+/* Close button */
+.closeButton {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: bold;
+  opacity: 0.8;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.closeButton:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1) rotate(90deg);
+}
+
+.closeButton:active {
+  transform: scale(0.95);
+}
+
+/* Exit animation */
+.notification.exiting {
+  animation: floatOut 0.3s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes floatOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+}
+
+/* Type-specific colors with gradients */
+.notification[data-type="success"] {
+  background: linear-gradient(135deg, #4CAF50, #66BB6A);
+}
+
+.notification[data-type="error"] {
+  background: linear-gradient(135deg, #F44336, #FF6B6B);
+}
+
+.notification[data-type="warning"] {
+  background: linear-gradient(135deg, #FF9800, #FFB74D);
+}
+
+.notification[data-type="info"] {
+  background: linear-gradient(135deg, #2196F3, #64B5F6);
+}
+
+/* Dark mode enhancements */
+[data-theme="dark"] .notification {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+              0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Stacking multiple notifications */
+.notification:nth-child(2) {
+  top: 90px;
+}
+
+.notification:nth-child(3) {
+  top: 160px;
+}
+
+.notification:nth-child(4) {
+  top: 230px;
+}
+
+/* Responsive Design */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .notification {
+    top: 16px;
+    right: 16px;
+    left: 16px;
+    max-width: none;
+    min-width: auto;
+    padding: 0.875rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .notificationIcon {
+    width: 24px;
+    height: 24px;
+    font-size: 1.1rem;
+  }
+  
+  /* Adjust stacking on tablet */
+  .notification:nth-child(2) {
+    top: 80px;
+  }
+  
+  .notification:nth-child(3) {
+    top: 144px;
+  }
+  
+  .notification:nth-child(4) {
+    top: 208px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .notification {
+    top: 12px;
+    right: 12px;
+    left: 12px;
+    padding: 0.75rem 0.875rem;
+    font-size: 0.85rem;
+    border-radius: 10px;
+    min-width: auto;
+    gap: 0.625rem;
+  }
+  
+  .notificationIcon {
+    width: 22px;
+    height: 22px;
+    font-size: 1rem;
+  }
+  
+  .closeButton {
+    width: 22px;
+    height: 22px;
+    font-size: 0.7rem;
+  }
+  
+  /* Adjust stacking on mobile */
+  .notification:nth-child(2) {
+    top: 72px;
+  }
+  
+  .notification:nth-child(3) {
+    top: 132px;
+  }
+  
+  .notification:nth-child(4) {
+    top: 192px;
+  }
+}
+
+/* Accessibility - Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .notification {
+    animation: fadeIn 0.2s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .notification.exiting {
+    animation: fadeOut 0.2s ease forwards;
+  }
+  
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  
+  .closeButton:hover {
+    transform: none;
+  }
+}

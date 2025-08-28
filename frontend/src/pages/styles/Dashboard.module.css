@@ -1,0 +1,355 @@
+/* pages/styles/Dashboard.module.css - Clean & Fast Design */
+
+.dashboard {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Header Section */
+.headerSection {
+  margin-bottom: 2rem;
+}
+
+
+
+.statCard {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.statIcon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.statContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.statValue.danger {
+  color: var(--danger);
+}
+
+.statDetail {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Categories Section */
+.categoriesSection {
+  margin-bottom: 2.5rem;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.875rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.sectionHeader h2 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.sectionHeader h2 i {
+  color: var(--primary);
+  font-size: 1.25rem;
+}
+
+.sectionSubtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Transactions Section */
+.transactionsSection {
+  background: var(--bg-card);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.refreshButton {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.625rem 1.25rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 184, 184, 0.25);
+}
+
+.refreshButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 184, 184, 0.35);
+}
+
+.refreshButton:disabled {
+  background: var(--text-muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.refreshButton i {
+  font-size: 0.875rem;
+}
+
+/* View All Container */
+.viewAllContainer {
+  text-align: center;
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.viewAllButton {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-size: 0.925rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.viewAllButton:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 184, 184, 0.25);
+}
+
+.viewAllButton i {
+  font-size: 0.875rem;
+  transition: transform 0.2s ease;
+}
+
+.viewAllButton:hover i {
+  transform: translateX(4px);
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--bg-hover);
+  border-radius: 16px;
+  margin: 1.5rem 0;
+}
+
+.emptyState i {
+  font-size: 3rem;
+  color: var(--primary);
+  margin-bottom: 0.875rem;
+  opacity: 0.5;
+}
+
+.emptyState h3 {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.emptyState p {
+  color: var(--text-secondary);
+  font-size: 0.925rem;
+}
+
+/* Dark Mode Specific */
+[data-theme="dark"] .statCard {
+  background: var(--bg-card);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .refreshButton {
+  box-shadow: 0 2px 8px rgba(0, 212, 212, 0.2);
+}
+
+[data-theme="dark"] .refreshButton:hover:not(:disabled) {
+  box-shadow: 0 4px 12px rgba(0, 212, 212, 0.3);
+}
+
+/* Tablet Responsive */
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 0;
+  }
+  
+  .headerSection {
+    margin-bottom: 1.5rem;
+  }
+  
+  
+  .statCard {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+  
+  .statIcon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.125rem;
+  }
+  
+  .statValue {
+    font-size: 1.25rem;
+  }
+  
+  .categoriesSection {
+    margin-bottom: 2rem;
+  }
+  
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .sectionHeader h2 {
+    font-size: 1.25rem;
+  }
+  
+  .transactionsSection {
+    padding: 1.5rem;
+    border-radius: 15px;
+  }
+  
+  .refreshButton {
+    padding: 0.5rem 1rem;
+    font-size: 0.825rem;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .statCard {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  
+  .statIcon {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+  
+  .statContent {
+    gap: 0.125rem;
+  }
+  
+  .statLabel {
+    font-size: 0.8rem;
+  }
+  
+  .statValue {
+    font-size: 1.125rem;
+  }
+  
+  .statDetail {
+    font-size: 0.7rem;
+  }
+  
+  .sectionHeader h2 {
+    font-size: 1.125rem;
+    gap: 0.5rem;
+  }
+  
+  .sectionHeader h2 i {
+    font-size: 1rem;
+  }
+  
+  .sectionSubtitle {
+    font-size: 0.8rem;
+  }
+  
+  .transactionsSection {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  
+  .refreshButton {
+    padding: 0.5rem 0.875rem;
+  }
+  
+  .refreshButton span {
+    display: none;
+  }
+  
+  .viewAllContainer {
+    padding-top: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .viewAllButton {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+}

@@ -1,0 +1,156 @@
+/* components/styles/BottomNavigation.module.css - Mobile App Style */
+
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  padding-bottom: env(safe-area-inset-bottom);
+  display: none;
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem 0.5rem;
+  height: 60px;
+}
+
+.navItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navItem:active {
+  transform: scale(0.95);
+}
+
+.navItem i {
+  font-size: 1.25rem;
+  transition: all 0.2s ease;
+}
+
+.label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.navItem.active {
+  color: var(--primary);
+}
+
+.navItem.active::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 50%;
+}
+
+/* Special Add Button */
+.specialItem {
+  flex: 0;
+  padding: 0;
+}
+
+.addButton {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 184, 184, 0.35);
+  position: relative;
+  top: -8px;
+  transition: all 0.2s ease;
+}
+
+.addButton i {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.specialItem:active .addButton {
+  transform: scale(0.9);
+  box-shadow: 0 2px 10px rgba(0, 184, 184, 0.3);
+}
+
+/* Safe Area Spacer */
+.safeAreaSpacer {
+  display: none;
+  height: 60px;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Dark Mode */
+[data-theme="dark"] .bottomNav {
+  background: var(--bg-card);
+  border-top-color: var(--border);
+  box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .addButton {
+  box-shadow: 0 4px 15px rgba(0, 212, 212, 0.3);
+}
+
+/* Show only on mobile */
+@media (max-width: 768px) {
+  .bottomNav {
+    display: block;
+  }
+  
+  .safeAreaSpacer {
+    display: block;
+  }
+}
+
+/* Smaller phones */
+@media (max-width: 380px) {
+  .navContainer {
+    height: 55px;
+  }
+  
+  .navItem i {
+    font-size: 1.125rem;
+  }
+  
+  .label {
+    font-size: 0.6rem;
+  }
+  
+  .addButton {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+  }
+  
+  .addButton i {
+    font-size: 1.25rem;
+  }
+}

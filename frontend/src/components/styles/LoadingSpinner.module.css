@@ -1,0 +1,62 @@
+.spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.spinnerCircle {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #D1F2EB;
+  border-top-color: #00B8B8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner p {
+  color: #00B8B8;
+  font-weight: 500;
+}
+
+/* Responsive Design for all components */
+@media (max-width: 768px) {
+  .modalLayout {
+    grid-template-columns: 1fr;
+  }
+  
+  .photoUploadArea {
+    height: 200px;
+  }
+  
+  .transactionItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .transactionAmount {
+    align-self: flex-end;
+    font-size: 1.4rem;
+  }
+  
+  .modalContent {
+    width: 95%;
+    margin: 1vh auto;
+  }
+  
+  .formActions {
+    flex-direction: column;
+  }
+  
+  .cancelButton,
+  .submitButton {
+    width: 100%;
+  }
+}

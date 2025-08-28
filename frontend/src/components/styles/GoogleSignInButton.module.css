@@ -1,0 +1,371 @@
+/* components/styles/GoogleSignInButton.module.css - Enhanced Modern Design */
+
+.signInContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.googleButtonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.googleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 26px;
+  background: white;
+  border: 2px solid #e0e7ff;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: relative;
+  min-height: 52px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+[data-theme="dark"] .googleButton {
+  background: var(--bg-card);
+  border-color: var(--border);
+  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.googleButton:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #c7d2fe;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .googleButton:hover:not(:disabled) {
+  background: var(--bg-hover);
+  border-color: var(--primary);
+}
+
+.googleButton:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.googleButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.googleButton.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.googleButton.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.googleIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 2.5px solid #f1f5f9;
+  border-top: 2.5px solid #4285f4;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .spinner {
+  border: 2.5px solid var(--bg-secondary);
+  border-top: 2.5px solid var(--primary);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 4px 0;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+}
+
+[data-theme="dark"] .divider::before,
+[data-theme="dark"] .divider::after {
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+.divider span {
+  padding: 0 18px;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+  background: var(--bg-primary);
+  position: relative;
+  z-index: 1;
+}
+
+.demoButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 26px;
+  background: linear-gradient(135deg, #00B8B8 0%, #4DD0E1 100%);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0, 184, 184, 0.3);
+  min-height: 52px;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.demoButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s;
+}
+
+.demoButton:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.demoButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #009999 0%, #4DD0E1 100%);
+  box-shadow: 0 8px 25px rgba(0, 184, 184, 0.4);
+  transform: translateY(-2px);
+}
+
+.demoButton:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(0, 184, 184, 0.3);
+}
+
+.demoButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.demoButton.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.statusIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px 0;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.statusLoading {
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  border-color: var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.statusWarning {
+  color: #f57c00;
+  background: linear-gradient(135deg, rgba(245, 124, 0, 0.1), rgba(245, 124, 0, 0.05));
+  border-color: rgba(245, 124, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.statusReady {
+  color: #2e7d32;
+  background: linear-gradient(135deg, rgba(46, 125, 50, 0.1), rgba(46, 125, 50, 0.05));
+  border-color: rgba(46, 125, 50, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+[data-theme="dark"] .statusWarning {
+  color: #ffb74d;
+  background: linear-gradient(135deg, rgba(255, 183, 77, 0.15), rgba(255, 183, 77, 0.08));
+  border-color: rgba(255, 183, 77, 0.25);
+}
+
+[data-theme="dark"] .statusReady {
+  color: #66bb6a;
+  background: linear-gradient(135deg, rgba(102, 187, 106, 0.15), rgba(102, 187, 106, 0.08));
+  border-color: rgba(102, 187, 106, 0.25);
+}
+
+.disclaimer {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.5;
+  max-width: 320px;
+  margin-top: 0.5rem;
+}
+
+.disclaimer .link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.disclaimer .link:hover {
+  text-decoration: underline;
+  color: var(--primary-dark);
+}
+
+/* Enhanced button loading states */
+.googleButton.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: shimmer 2s ease-in-out infinite;
+  border-radius: 12px;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Focus styles for accessibility */
+.googleButton:focus,
+.demoButton:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .signInContainer {
+    gap: 1rem;
+    padding: 0 1rem;
+    max-width: 100%;
+  }
+  
+  .googleButton,
+  .demoButton {
+    padding: 16px 24px;
+    font-size: 15px;
+    min-height: 54px;
+  }
+  
+  .disclaimer {
+    font-size: 11px;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signInContainer {
+    padding: 0 0.5rem;
+  }
+  
+  .googleButton,
+  .demoButton {
+    padding: 15px 20px;
+    font-size: 14px;
+    min-height: 52px;
+  }
+  
+  .disclaimer {
+    font-size: 10px;
+    max-width: 280px;
+    line-height: 1.4;
+  }
+  
+  .statusIndicator {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .googleButton {
+    border-width: 3px;
+    border-color: #000;
+  }
+  
+  .statusIndicator {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .googleButton,
+  .demoButton,
+  .spinner {
+    animation: none;
+    transition: none;
+  }
+  
+  .googleButton:hover,
+  .demoButton:hover {
+    transform: none;
+  }
+}

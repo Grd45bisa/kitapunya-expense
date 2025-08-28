@@ -1,0 +1,113 @@
+/* Global Variables & Dark Mode Support */
+:root {
+  /* Light Mode */
+  --primary: #00B8B8;
+  --primary-light: #4DD0E1;
+  --secondary: #2F4F4F;
+  --text-primary: #2F4F4F;
+  --text-secondary: #607D8B;
+  --text-muted: #B0B0B0;
+  --bg-primary: #F8FFFE;
+  --bg-secondary: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-hover: rgba(0, 184, 184, 0.05);
+  --border: rgba(169, 201, 212, 0.2);
+  --shadow-sm: 0 4px 15px rgba(47, 79, 79, 0.08);
+  --shadow-md: 0 10px 30px rgba(47, 79, 79, 0.1);
+  --shadow-lg: 0 20px 50px rgba(47, 79, 79, 0.15);
+  --success: #4CAF50;
+  --error: #FF6B6B;
+  --warning: #FFA726;
+  --info: #29B6F6;
+}
+
+[data-theme="dark"] {
+  /* Dark Mode */
+  --primary: #00D4D4;
+  --primary-light: #5DE4F5;
+  --secondary: #E0E0E0;
+  --text-primary: #F5F5F5;
+  --text-secondary: #B0BEC5;
+  --text-muted: #78909C;
+  --bg-primary: #121212;
+  --bg-secondary: #1E1E1E;
+  --bg-card: #2C2C2C;
+  --bg-hover: rgba(0, 212, 212, 0.1);
+  --border: rgba(255, 255, 255, 0.12);
+  --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.5);
+  --success: #66BB6A;
+  --error: #EF5350;
+  --warning: #FFB74D;
+  --info: #4FC3F7;
+}
+
+/* Base Reset & Typography */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Utility Classes */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+  opacity: 0.5;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  opacity: 0.8;
+}
+
+/* Focus Styles for Accessibility */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Smooth Transitions */
+*, *::before, *::after {
+  transition: background-color 0.3s ease, 
+              color 0.3s ease, 
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}

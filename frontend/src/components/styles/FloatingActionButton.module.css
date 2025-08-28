@@ -1,0 +1,134 @@
+/* components/styles/FloatingActionButton.module.css - Dark Mode & Responsive */
+
+.fab {
+  position: fixed !important;
+  bottom: 25px !important;
+  right: 25px !important;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(0, 184, 184, 0.35);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+  border: none;
+  color: white;
+  font-size: 1.4rem;
+  overflow: hidden;
+}
+
+.fab::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+.fab:hover::before {
+  width: 100px;
+  height: 100px;
+}
+
+.fab::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--primary), var(--primary-light), var(--primary));
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: fabRotate 2s linear infinite;
+}
+
+@keyframes fabRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.fab:hover::after {
+  opacity: 1;
+}
+
+.fab:hover {
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0, 184, 184, 0.45);
+}
+
+.fab:active {
+  transform: scale(0.95);
+  box-shadow: 0 5px 20px rgba(0, 184, 184, 0.35);
+}
+
+.fab i {
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.fab:hover i {
+  transform: rotate(90deg);
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 8px 25px rgba(0, 184, 184, 0.35);
+  }
+  50% {
+    box-shadow: 0 8px 25px rgba(0, 184, 184, 0.35), 0 0 0 12px rgba(0, 184, 184, 0.1);
+  }
+  100% {
+    box-shadow: 0 8px 25px rgba(0, 184, 184, 0.35), 0 0 0 25px transparent;
+  }
+}
+
+.fab {
+  animation: pulse 2s infinite;
+}
+
+.fab:hover {
+  animation: none;
+}
+
+/* Dark Mode Specific */
+[data-theme="dark"] .fab {
+  box-shadow: 0 8px 25px rgba(0, 212, 212, 0.3);
+}
+
+[data-theme="dark"] .fab:hover {
+  box-shadow: 0 12px 35px rgba(0, 212, 212, 0.4);
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .fab {
+    width: 52px;
+    height: 52px;
+    bottom: 20px !important;
+    right: 20px !important;
+    font-size: 1.3rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .fab {
+    width: 48px;
+    height: 48px;
+    bottom: 16px !important;
+    right: 16px !important;
+    font-size: 1.2rem;
+  }
+}

@@ -1,0 +1,1065 @@
+/* pages/styles/Settings.module.css - Complete with Language Switcher */
+
+.settings {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Header Section */
+.header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  padding: 2rem;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerTitle h1 {
+  font-size: 2rem;
+  color: white;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+}
+
+.headerTitle p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+.saveIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  animation: fadeInScale 0.3s ease;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Tab Navigation */
+.tabNavigation {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--bg-card);
+  padding: 0.5rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+  overflow-x: auto;
+}
+
+.tabButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tabButton:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.tabButton.active {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 184, 184, 0.3);
+}
+
+.tabButton i {
+  font-size: 1rem;
+}
+
+/* Settings Content */
+.settingsContent {
+  background: var(--bg-card);
+  border-radius: 20px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  min-height: 500px;
+}
+
+.tabContent {
+  padding: 2rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Profile Section */
+.profileSection {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.avatarSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatarContainer {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: var(--shadow-md);
+}
+
+.avatarPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 3rem;
+  box-shadow: var(--shadow-md);
+}
+
+.avatarOverlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  background: var(--primary);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.avatarContainer:hover .avatarOverlay {
+  opacity: 1;
+}
+
+.changePhotoBtn {
+  padding: 0.5rem 1rem;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.changePhotoBtn:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+/* Form Section */
+.formSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.formGroup label i {
+  color: var(--primary);
+  width: 16px;
+}
+
+.input,
+.select {
+  padding: 0.875rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  transition: all 0.2s ease;
+}
+
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--bg-card);
+  box-shadow: 0 0 0 4px rgba(0, 184, 184, 0.1);
+}
+
+.inputDisabled {
+  padding: 0.875rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  background: var(--bg-hover);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.inputHelp {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-left: 1.5rem;
+}
+
+.budgetInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currencySymbol {
+  position: absolute;
+  left: 1rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  z-index: 1;
+}
+
+.budgetInput {
+  width: 100%;
+  padding: 0.875rem 1rem 0.875rem 2.5rem;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  transition: all 0.2s ease;
+}
+
+.budgetInput:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--bg-card);
+  box-shadow: 0 0 0 4px rgba(0, 184, 184, 0.1);
+}
+
+.primaryButton {
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(0, 184, 184, 0.3);
+  margin-top: 1rem;
+}
+
+.primaryButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 184, 184, 0.4);
+}
+
+.primaryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Preferences Section */
+.preferencesSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.sectionTitle i {
+  color: var(--primary);
+}
+
+.preferencesList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.preferenceItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  background: var(--bg-secondary);
+  border-radius: 15px;
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+.preferenceItem:hover {
+  background: var(--bg-hover);
+  transform: translateX(4px);
+}
+
+.preferenceInfo {
+  flex: 1;
+}
+
+.preferenceInfo h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.preferenceInfo h3 i {
+  color: var(--primary);
+  width: 20px;
+}
+
+.preferenceInfo p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+  margin-left: 1.75rem;
+}
+
+/* Language Dropdown Styles */
+.languageDropdown {
+  padding: 0.625rem 1rem;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 150px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2300B8B8' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px;
+  padding-right: 2.5rem;
+}
+
+.languageDropdown:hover {
+  border-color: var(--primary);
+  background-color: var(--bg-hover);
+}
+
+.languageDropdown:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(0, 184, 184, 0.1);
+}
+
+.languageDropdown option {
+  padding: 0.5rem;
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+/* Remove old language selector styles */
+.languageSelector {
+  display: none;
+}
+
+.languageButton {
+  display: none;
+}
+
+/* Switch Styles */
+.switch {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--border);
+  transition: all 0.3s ease;
+  border-radius: 28px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background: white;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.switch input:checked + .slider {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+/* Data Section */
+.dataSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dataActions {
+  display: grid;
+  justify-items: right;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.actionButton:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 184, 184, 0.3);
+}
+
+.actionButton i {
+  font-size: 1.1rem;
+}
+
+/* Danger Zone */
+.dangerZone {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.05), rgba(255, 135, 135, 0.05));
+  border-radius: 15px;
+  border: 1px solid rgba(255, 107, 107, 0.2);
+}
+
+.dangerTitle {
+  font-size: 1.125rem;
+  color: #D32F2F;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1.5rem 0;
+}
+
+.dangerCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255, 107, 107, 0.15);
+}
+
+.dangerInfo {
+  flex: 1;
+}
+
+.dangerInfo h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.dangerInfo p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.logoutButton {
+  padding: 0.625rem 1.25rem;
+  background: linear-gradient(135deg, #FF9800, #FFB74D);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoutButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+}
+
+.deleteButton {
+  padding: 0.625rem 1.25rem;
+  background: linear-gradient(135deg, #F44336, #E57373);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.deleteButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  backdrop-filter: blur(8px);
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalContent {
+  background: var(--bg-card);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  max-width: 500px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(255, 107, 107, 0.1));
+}
+
+.modalHeader h3 {
+  font-size: 1.25rem;
+  color: #D32F2F;
+  margin: 0;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modalClose {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.modalClose:hover {
+  background: rgba(244, 67, 54, 0.1);
+  color: #D32F2F;
+}
+
+.modalBody {
+  padding: 1.5rem;
+}
+
+.warningBox {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 135, 135, 0.1));
+  border: 1px solid rgba(244, 67, 54, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.warningBox p {
+  font-weight: 600;
+  color: #D32F2F;
+  margin: 0 0 0.75rem 0;
+}
+
+.warningBox ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--text-primary);
+}
+
+.warningBox li {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.confirmationInput {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.confirmationInput label {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.confirmationInput strong {
+  color: #D32F2F;
+}
+
+.modalFooter {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.cancelButton {
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+  background: var(--bg-hover);
+  transform: translateY(-1px);
+}
+
+.confirmDeleteButton {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #F44336, #E57373);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.confirmDeleteButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+}
+
+.confirmDeleteButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Dark Mode Specific Styles */
+[data-theme="dark"] .dangerCard {
+  background: var(--bg-card);
+}
+
+[data-theme="dark"] .languageSelector {
+  background: var(--bg-card);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .languageButton:hover {
+  background: var(--bg-hover);
+}
+
+[data-theme="dark"] .languageButton.active {
+  background: var(--primary);
+  box-shadow: 0 2px 8px rgba(0, 212, 212, 0.2);
+}
+
+[data-theme="dark"] .modalContent {
+  background: var(--bg-card);
+}
+
+[data-theme="dark"] .warningBox {
+  background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(255, 107, 107, 0.1));
+}
+
+/* Responsive - Tablet */
+@media (max-width: 768px) {
+  .header {
+    padding: 1.5rem;
+    border-radius: 15px;
+  }
+  
+  .headerTitle h1 {
+    font-size: 1.5rem;
+  }
+  
+  .tabNavigation {
+    gap: 0.25rem;
+  }
+  
+  .tabButton {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .tabButton span {
+    display: none;
+  }
+  
+  .tabContent {
+    padding: 1.5rem;
+  }
+  
+  .profileSection {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+  
+  .formSection {
+    width: 100%;
+  }
+  
+  .dataActions {
+    grid-template-columns: 1fr;
+  }
+  
+  .modalContent {
+    max-height: 90vh;
+  }
+  
+  .modalFooter {
+    flex-direction: column;
+  }
+  
+  .cancelButton,
+  .confirmDeleteButton {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .languageSelector {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    gap: 0.375rem;
+  }
+  
+  .languageButton {
+    flex: 1;
+    justify-content: center;
+    padding: 0.625rem 0.5rem;
+    min-width: 0;
+    font-size: 0.825rem;
+  }
+  
+  .languageButton span {
+    display: none;
+  }
+  
+  .languageButton::after {
+    content: attr(data-label-short);
+  }
+  
+  .dangerCard {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  
+  .logoutButton,
+  .deleteButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 480px) {
+  .settings {
+    padding: 0;
+  }
+  
+  .header {
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+  }
+  
+  .headerContent {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .headerTitle h1 {
+    font-size: 1.25rem;
+  }
+  
+  .headerTitle p {
+    font-size: 0.875rem;
+  }
+  
+  .saveIndicator {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .tabNavigation {
+    margin-bottom: 1rem;
+    border-radius: 12px;
+  }
+  
+  .tabButton {
+    padding: 0.625rem;
+  }
+  
+  .tabButton i {
+    font-size: 1.1rem;
+  }
+  
+  .settingsContent {
+    border-radius: 15px;
+    min-height: 400px;
+  }
+  
+  .tabContent {
+    padding: 1rem;
+  }
+  
+  .avatarContainer {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .avatarPlaceholder {
+    font-size: 2.5rem;
+    border-radius: 15px;
+  }
+  
+  .avatar {
+    border-radius: 15px;
+  }
+  
+  .sectionTitle {
+    font-size: 1.125rem;
+  }
+  
+  .preferenceItem {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  
+  .preferenceInfo h3 {
+    font-size: 0.95rem;
+  }
+  
+  .preferenceInfo p {
+    font-size: 0.8rem;
+  }
+  
+  .languageButton {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem;
+    min-width: 0;
+    flex: 1;
+  }
+  
+  .dangerZone {
+    padding: 1.25rem;
+    border-radius: 12px;
+  }
+  
+  .dangerTitle {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .modal {
+    padding: 0.5rem;
+  }
+  
+  .modalContent {
+    border-radius: 15px;
+  }
+  
+  .modalHeader {
+    padding: 1.25rem;
+  }
+  
+  .modalHeader h3 {
+    font-size: 1.125rem;
+  }
+  
+  .modalBody {
+    padding: 1.25rem;
+  }
+  
+  .modalFooter {
+    padding: 1.25rem;
+    gap: 0.75rem;
+  }
+  
+  .input,
+  .select,
+  .budgetInput {
+    font-size: 0.875rem;
+    border-radius: 10px;
+  }
+  
+  .primaryButton {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+    border-radius: 10px;
+  }
+}
