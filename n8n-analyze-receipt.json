@@ -1,0 +1,194 @@
+{
+  "name": "n8n-analyze-receipt",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "=define",
+        "text": "=# Sistem Ekstraksi Data Struk Belanja\n\n**Input:** Gambar struk dan data filename  \n**Output:** JSON sesuai format berikut:\n\n```json\n{\n  \"filename\": \"{{$binary.file.fileName}}\",\n  \"toko\": \"nama toko dari struk\",\n  \"total\": jumlah_total_dalam_integer,\n  \"kategori\": \"makanan/transportasi/belanja/hiburan/kesehatan/pendidikan/lainnya\",\n  \"tanggal\": \"YYYY-MM-DD\",\n  \"alamat\": \"alamat toko jika ada\",\n  \"catatan\": \"format catatan sesuai kategori di bawah\",\n  \"confidence\": 0.xx\n}\n```\n\n## Kategori Rules:\n- **makanan**: KFC, McDonald's, Starbucks, warteg, bakso, café, delivery\n- **transportasi**: Grab, Gojek, bensin, parkir, tol, tiket transportasi  \n- **belanja**: Indomaret, Alfamart, mall, online shop, supermarket\n- **hiburan**: bioskop, game, gym, karaoke, wisata, entertainment\n- **kesehatan**: apotek, dokter, rumah sakit, klinik, lab\n- **pendidikan**: sekolah, universitas, buku, kursus, pelatihan\n- **lainnya**: listrik, air, internet, kosmetik, household\n\n## Format Catatan Berdasarkan Kategori:\n- **makanan**: \"Beli [item1 Rp X,\\n item2 Rp Y] di [nama toko].\"\n- **transportasi**: \"Naik [jenis transport] dari [lokasi asal] ke [lokasi tujuan] Rp X.\"\n- **belanja**: \"Beli [item1 Rp X, item2 Rp Y] di [nama toko].\"\n- **hiburan**: \"[aktivitas] di [tempat] Rp X. Alasan: [motif]\"\n- **kesehatan**: \"Beli [obat/layanan] di [tempat] Rp X.\"\n- **pendidikan**: \"Bayar [semester/kursus/buku] untuk [program/mata kuliah] Rp X.\"\n- **lainnya**: \"Bayar [layanan/barang] Rp X.\"\n\n## Aturan Tanggal:\n- Jika struk memiliki tanggal lengkap (DD/MM/YYYY): gunakan tanggal tersebut\n- **Jika struk hanya memiliki bulan dan tanggal (DD/MM atau MM/DD): gunakan tahun 2025**\n- Jika tidak ada tanggal sama sekali: gunakan tanggal hari ini (2025-08-15)\n- Format output selalu: \"YYYY-MM-DD\"\n\n## Contoh Output:\n```json\n{\n  \"filename\": \"img_20190511_084303.jpg\",\n  \"toko\": \"Warung Bu Ani\",\n  \"total\": 18000,\n  \"kategori\": \"makanan\",\n  \"tanggal\": \"2025-08-13\",\n  \"alamat\": \"Jl. Sudirman No. 15\",\n  \"catatan\": \"Beli ayam geprek Rp 15.000,\\n es teh Rp 3.000 di Warung Bu Ani.\",\n  \"confidence\": 0.9\n}\n```\n\n## Error Handling:\nJika gambar bukan struk atau teks tidak jelas:\n```json\n{\n  \"error\": \"ERROR: [penjelasan detail masalah]\"\n}\n```",
+        "options": {
+          "systemMessage": "=Kamu adalah AI khusus untuk menganalisis struk belanja Indonesia. Tugasmu mengekstrak data dari struk dan membuat catatan pembelian dengan alasan yang masuk akal dan natural. Jika gambar struk tidak jelas atau bukan struk belanja, jawab dengan error."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -192,
+        -128
+      ],
+      "id": "a3730531-c95c-4a5d-9e3c-c0536220a5d8",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "jsCode": "console.log('🔍 Processing AI response...');\n\nlet raw = $json.output || $json.text || $json;\nlet result = {};\n\n// Parse JSON\ntry {\n  if (typeof raw === 'string') {\n    let jsonMatch = raw.match(/\\{[\\s\\S]*?\\}/);\n    result = jsonMatch ? JSON.parse(jsonMatch[0].replace(/```json|```/g, '').trim()) : {};\n  } else {\n    result = raw || {};\n  }\n} catch (err) {\n  console.error('❌ JSON Parse Error:', err.message);\n  result = {};\n}\n\n// Handle error - hanya return error dan penjelasan\nif (result.error) {\n  console.warn('⚠️ AI Error:', result.error);\n  return [{ json: { error: String(result.error).trim() } }];\n}\n\nconst validKategori = ['makanan', 'transportasi', 'belanja', 'hiburan', 'kesehatan', 'pendidikan', 'lainnya'];\n\n// Extract data dengan fallback\nlet filename = result.filename || $binary?.file?.fileName || 'unknown_file';\nlet total = Math.max(0, parseInt(result.total || 0));\nlet kategori = String(result.kategori || 'lainnya').toLowerCase();\nif (!validKategori.includes(kategori)) kategori = 'lainnya';\n\n// Format tanggal sesuai rules\nlet tanggal = '2025-08-15'; // default hari ini\nif (/^\\d{4}-\\d{2}-\\d{2}$/.test(result.tanggal)) {\n  tanggal = result.tanggal;\n} else if (/^\\d{2}\\/\\d{2}\\/\\d{4}$/.test(result.tanggal)) {\n  let [dd, mm, yyyy] = result.tanggal.split('/');\n  tanggal = `${yyyy}-${mm.padStart(2,'0')}-${dd.padStart(2,'0')}`;\n} else if (/^\\d{2}\\/\\d{2}$/.test(result.tanggal)) {\n  let [dd, mm] = result.tanggal.split('/');\n  tanggal = `2025-${mm.padStart(2,'0')}-${dd.padStart(2,'0')}`;\n}\n\nreturn [{\n  json: {\n    filename: filename.trim(),\n    toko: String(result.toko || '').trim(),\n    total,\n    kategori,\n    tanggal,\n    alamat: String(result.alamat || '').trim(),\n    catatan: String(result.catatan || '').trim(),\n    confidence: parseFloat(result.confidence || 0.8)\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        96,
+        -128
+      ],
+      "id": "f65a9093-875a-4d08-8f11-08131534b33d",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "analyze-receipt",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -512,
+        -128
+      ],
+      "id": "42ca24be-d991-47c3-82ec-7a0199ba5583",
+      "name": "Webhook1",
+      "webhookId": "65ab51cb-6f84-41cd-bb1c-d0fe4ce6761f"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Access-Control-Allow-Methods",
+                "value": "POST, OPTIONS"
+              },
+              {
+                "name": "Access-Control-Allow-Headers",
+                "value": "Content-Type"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        272,
+        -128
+      ],
+      "id": "59699c05-c11f-42a1-a592-217a7ad0fb53",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "operation": "resize",
+        "dataPropertyName": "file",
+        "resizeOption": "minimumArea",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.editImage",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        -128
+      ],
+      "id": "9195bcb4-e5dd-4ea5-b1ef-a3124f78bd06",
+      "name": "Edit Image"
+    },
+    {
+      "parameters": {
+        "model": "google/gemini-flash-1.5-8b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        80
+      ],
+      "id": "2f95b9b0-4305-4c5d-b33c-7cce076f4e04",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "dAkh3H5rvsyoqwcW",
+          "name": "OpenRouter account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Edit Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Image": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2989c045-de8d-474d-8426-206c6d2a9bb5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8d5db49994b3b92b773791cf8d2ec789b3b01891e26d4ca3ef704ddfdbff6316"
+  },
+  "id": "rSf92TtcDzvXs8t7",
+  "tags": []
+}
